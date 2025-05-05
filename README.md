@@ -63,9 +63,8 @@ lib/
 └── features/                 # Feature modules
     ├── posts/                # Posts feature
     │   ├── data/             # Data layer
-    │   │   └── repositories/ # Repositories for data access
-    │   │       ├── post_repository.dart
-    │   │       └── comment_repository.dart
+    │   │   ├── post_repository.dart
+    │   │   └── comment_repository.dart
     │   └── presentation/     # UI layer
     │       ├── controllers/  # GetX controllers for state management
     │       │   ├── posts_controller.dart
@@ -76,8 +75,7 @@ lib/
     │
     └── users/                # Users feature
         ├── data/             # Data layer
-        │   └── repositories/ # Repositories for data access
-        │       └── user_repository.dart
+        │   └── user_repository.dart
         └── presentation/     # UI layer
             ├── controllers/  # GetX controllers for state management
             │   └── users_controller.dart
@@ -127,6 +125,6 @@ Each feature (posts, users) is independent and can be developed, tested, and mai
 
 ## Learning Resources
 
-- [GetX Documentation](https://github.com/jonataslaw/getx/blob/master/documentation/en_US/introduction.md)
+- [GetX](https://pub.dev/packages/get)
 - [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
 - [Feature-First Architecture in Flutter](https://codewithandrea.com/articles/flutter-project-structure/)
