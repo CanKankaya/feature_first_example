@@ -12,118 +12,80 @@
 
 # Feature-First Architecture with GetX Example
 
-This Flutter application demonstrates a **Feature-First Architecture** pattern using the GetX state management library. The app consumes the JSONPlaceholder API to showcase posts, comments, and users in a well-structured, maintainable codebase.
+This is a very simple app that just showcases **Feature-First Architecture**
 
-## Features
+We are using Getx, but you can use any other package for state management with similar implementation. (Riverpod, Mobx, BloC etc)
 
-- View, create, update, and delete posts
-- View post details and associated comments
-- Browse user profiles and their posts
-- Clean, maintainable architecture
+## Architecture Layers
 
-## Architecture Overview
+### 1. Core
+Contains app-wide structural modules:
+- **API Service**: Generic service handling HTTP requests with the API, like a wrapper for the repos to use.
+- **App Bindings**: Dependancy injection (Using Getx)
+- **Routes**: App navigation routes
 
-This project is organized using a **Feature-First Architecture** approach, which organizes code based on features rather than technical layers. This approach offers several advantages:
+### 2. Common 
+Shared resources used across features:
+- **Models**: Data models used commonly in the app.
+- **Widgets**: Shared UI components
 
-- **Domain Isolation**: Each feature is isolated, making the codebase more maintainable
-- **Scalability**: Easy to add new features without affecting existing ones
-- **Testability**: Feature modules can be tested independently
-- **Clear Boundaries**: Each feature has well-defined responsibilities
+### 3. Features
+Each feature is a self-contained module with its own layers:
+- **Data**: Repositories for API requests, or other data specific modules, but specific to the feature
+- **Presentation**: UI, widgets and state management.
+  - **Controllers**: GetX controllers for reactive state management.
+  - **Screens**: UI screens for the feature.
+  - **Widgets**: Widgets used in the screen.
 
-### Technology Stack
-
-- **Flutter**: UI framework
-- **GetX**: State management, dependency injection, and navigation
-- **HTTP**: API communication
-- **JSONPlaceholder API**: RESTful API providing fake data
 
 ## Project Structure
 
 ```
 lib/
 │
-├── main.dart                 # Application entry point
+├── main.dart                           # Application entry point
 │
-├── common/                   # Shared components across features
-│   ├── models/               # Data models used across features
+├── common/                             # Shared components across features
+│   ├── models/                         # Data models used across features
 │   │   ├── post.dart
 │   │   ├── comment.dart
 │   │   └── user.dart
-│   ├── constants/            # Application-wide constants
-│   └── widgets/              # Shared widgets
+│   ├── constants/                      # Application-wide constants
+│   └── widgets/                        # Shared widgets
 │
-├── core/                     # Core functionality and services
-│   ├── app/                  # App configuration
-│   │   ├── bindings.dart     # GetX dependency injection setup
-│   │   └── routes.dart       # Application routes
-│   ├── services/             # Core services
-│   │   └── api_service.dart  # Generic API handling service
-│   └── utils/                # Utility classes and functions
+├── core/                               # Core functionality and services
+│   ├── app/                            # App configuration
+│   │   ├── bindings.dart               # GetX dependency injection setup
+│   │   └── routes.dart                 # Application routes
+│   ├── services/                       # Core services
+│   │   └── api_service.dart            # Generic API handling service
+│   └── utils/                          # Utility classes and functions
 │
-└── features/                 # Feature modules
-    ├── posts/                # Posts feature
-    │   ├── data/             # Data layer
+└── features/                           # Feature modules
+    ├── posts/                          # Posts feature
+    │   ├── data/                       # Data layer
     │   │   ├── post_repository.dart
     │   │   └── comment_repository.dart
-    │   └── presentation/     # UI layer
-    │       ├── controllers/  # GetX controllers for state management
+    │   └── presentation/               # UI layer
+    │       ├── controllers/            # GetX controllers for state management
     │       │   ├── posts_controller.dart
     │       │   └── post_detail_controller.dart
-    │       └── screens/      # UI screens for this feature
+    │       └── screens/                # UI screens for this feature
     │           ├── posts_screen.dart
     │           └── post_detail_screen.dart
     │
-    └── users/                # Users feature
-        ├── data/             # Data layer
+    └── users/                          # Users feature
+        ├── data/                       # Data layer
         │   └── user_repository.dart
-        └── presentation/     # UI layer
-            ├── controllers/  # GetX controllers for state management
+        └── presentation/               # UI layer
+            ├── controllers/            # GetX controllers for state management
             │   └── users_controller.dart
-            └── screens/      # UI screens for this feature
+            └── screens/                # UI screens for this feature
                 ├── users_screen.dart
                 └── user_posts_screen.dart
 ```
 
-## Architecture Layers Explained
-
-### 1. Core Layer
-Contains application-wide functionality:
-- **API Service**: Generic service handling HTTP requests to JSONPlaceholder API
-- **App Bindings**: Setup for GetX dependency injection
-- **Routes**: Application navigation routes
-
-### 2. Common Layer 
-Shared resources used across features:
-- **Models**: Data models representing API entities (Post, Comment, User)
-- **Widgets**: Reusable UI components
-
-### 3. Feature Modules
-Each feature is a self-contained module with its own layers:
-- **Data Layer**: Repositories for API communication, specific to the feature
-- **Presentation Layer**: UI components and state management
-  - **Controllers**: GetX controllers for reactive state management
-  - **Screens**: UI screens for the feature
-
-## Implementation Details
-
-### GetX for State Management
-- **Reactive State**: Using Rx variables and Obx for reactive UI updates
-- **Dependency Injection**: Automatic dependency resolution with Get.find()
-- **Navigation**: Route management with GetX navigation
-
-### API Service
-The application uses a centralized API service that handles all HTTP communication with the JSONPlaceholder API, providing a clean interface for repositories to interact with.
-
-### Feature Independence
-Each feature (posts, users) is independent and can be developed, tested, and maintained separately, while still sharing common resources when needed.
-
-## Getting Started
-
-1. Clone this repository
-2. Run `flutter pub get` to install dependencies
-3. Run `flutter run` to start the application
-
-## Learning Resources
+## Resources
 
 - [GetX](https://pub.dev/packages/get)
 - [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
